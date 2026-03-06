@@ -1,61 +1,57 @@
 # eslint-config-nicenice
 
-This is standard + standard-jsx with a couple overrides:
+ESLint flat config based on [neostandard](https://github.com/neostandard/neostandard) with some extra rules for React, imports, and SVG JSX.
 
-```js
-{
-  'jsx-quotes': ['error', 'prefer-double'],
-  'object-curly-spacing': ['error', 'always'],
-  'comma-dangle': ['error', 'always-multiline'],
-}
-```
+**v5 requires ESLint 10+ and flat config.** Prettier is expected to be run separately for formatting.
 
-So
-
-```js
-// Dangling commas on multiline things
-const a = {
-  omg: 1,
-}
-
-// Spaces around curleys
-const b = { wowza: true }
-
-// JSX quotes are double quotes.
-const Cat = () => (
-  <input type="text" placeholder="Tell me about your cat" />
-)
-```
-
-## Try it out here
-```sh
-yarn
-node_modules/.bin/eslint ./test
-```
-
-## Use
-
-Install the thing
+## Install
 
 ```sh
-yarn add --dev eslint-config-nicenice
+npm install --save-dev eslint-config-nicenice eslint neostandard eslint-plugin-import-x eslint-plugin-no-only-tests eslint-plugin-svg-jsx globals prettier
 ```
 
-Install many dependencies because [eslint sucks at them](https://github.com/eslint/eslint/issues/3458)
+## Usage
 
-```sh
-yarn add --dev eslint-config-nicenice
-
-# add a billion dependencies because eslint doesnt handle allow them to be wrapped up in this package. Sorry
-yarn add --dev eslint @babel/eslint-parser @babel/core eslint-config-standard eslint-config-standard-jsx eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-react eslint-plugin-no-only-tests eslint-plugin-svg-jsx eslint-plugin-n eslint-config-prettier eslint-plugin-prettier
-```
-
-Create a `.eslintrc.js` file:
+Create an `eslint.config.js` file:
 
 ```js
-module.exports = {
-  extends: ['nicenice']
-}
+export { default } from 'eslint-config-nicenice'
 ```
+
+Or if you want to extend or override:
+
+```js
+import nicenice from 'eslint-config-nicenice'
+
+export default [
+  ...nicenice,
+  {
+    rules: {
+      // your overrides
+    },
+  },
+]
+```
+
+Run ESLint:
+
+```sh
+npx eslint .
+```
+
+Run Prettier separately for formatting:
+
+```sh
+npx prettier --check .
+```
+
+## What's included
+
+- [neostandard](https://github.com/neostandard/neostandard) base rules (with `noStyle: true` — no formatting rules)
+- `eslint-plugin-import-x` for import validation
+- `eslint-plugin-no-only-tests` to catch leftover `.only` in tests
+- `eslint-plugin-svg-jsx` for SVG-in-JSX rules
+- React rules including `react/sort-comp` lifecycle ordering
+- Test file overrides with mocha/jest/jasmine globals
 
 ![so_good](https://user-images.githubusercontent.com/69169/38057017-f6b53d9e-3292-11e8-954e-8900809d442c.png)

@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:eslint.org)",
+      "WebFetch(domain:unpkg.com)",
+      "WebFetch(domain:deepwiki.com)",
+      "WebFetch(domain:app.unpkg.com)",
+      "WebFetch(domain:mtillmann.blog)",
+      "WebFetch(domain:www.npmpeer.dev)",
+      "Bash(npm view:*)",
+      "Bash(npm pack:*)"
+    ]
+  }
+}
